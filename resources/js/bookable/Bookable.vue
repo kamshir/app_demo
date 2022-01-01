@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 pb-4">
       <div class="card">
         <div class="card-body">
           <div v-if="!loading">
@@ -11,13 +11,26 @@
           <div v-else>Loading...</div>
         </div>
       </div>
+
+      <review-list></review-list>
+
     </div>
-    <div class="col-md-4">availability & prices</div>
+    <div class="col-md-4 pb-4">
+      <Availability></Availability>
+    </div>
   </div>
 </template>
 
 <script>
+
+import Availability from "./Availability";
+import ReviewList from "./ReviewList";
+
 export default {
+  components: {
+    Availability,
+    ReviewList
+  },
   data() {
     return {
       bookable: null,
@@ -30,8 +43,14 @@ export default {
     .get(`/api/bookables/${this.$route.params.id}`)
     .then(response => {
       this.bookable = response.data.data;
-    });
-    this.loading = false;
+    })
+    .catch(error => {
+      if (422 === error.response.status) {
+        this.errors = error.response.data.errors;
+      }
+      this.status = error.response.status;
+    })
+    .then(() => (this.loading = false));
   }
 }
 </script>
