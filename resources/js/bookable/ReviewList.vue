@@ -8,8 +8,7 @@
         <div class="row pt-4">
           <div class="col-md-6">Maks Mash</div>
           <div class="col-md-6 d-flex justify-content-end">
-            {{ review.rating }}
-            <star-rating :rating="review.rating" class="fa-lg"></star-rating>
+            <star-rating :value="review.rating" class="fa-lg"></star-rating>
           </div>
         </div>
         <div class="row">
@@ -27,7 +26,7 @@
 
 export default {
     props: {
-      bookableId: Number,
+      bookableId: String,
     },
     data() {
       return {

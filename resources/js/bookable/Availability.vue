@@ -16,9 +16,9 @@
           placeholder="Start date"
           v-model="from"
           @keyup.enter="check"
-          :class="[{'is-invalid': this.errorsFor('form')}]"
+          :class="[{'is-invalid': this.errorFor('from')}]"
         />
-        <div class="invalid-feedback" v-for="(error, index) in this.errorsFor('to')" :key="'to' + index">{{ error }}</div>
+        <div class="invalid-feedback" v-for="(error, index) in this.errorFor('from')" :key="'from' + index">{{ error }}</div>
       </div>
       <div class="form-group col-md-6">
         <label for="to">To</label>
@@ -29,9 +29,9 @@
           placeholder="End date"
           v-model="to"
           @keyup.enter="check"
-          :class="[{'is-invalid': this.errorsFor('to')}]"
+          :class="[{'is-invalid': this.errorFor('to')}]"
         />
-        <div class="invalid-feedback" v-for="(error, index) in this.errorsFor('to')" :key="'to' + index">{{ error }}</div>
+        <div class="invalid-feedback" v-for="(error, index) in this.errorFor('to')" :key="'to' + index">{{ error }}</div>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
 <script>
   export default {
     props: {
-      bookableId: Number
+      bookableId: String
     },
     data() {
       return {
@@ -71,7 +71,7 @@
         })
         .then(() => (this.loading = false));
       },
-      errorsFor(field) {
+      errorFor(field) {
         return this.hasErrors && this.errors[field] ? this.errors[field] : null;
       }
     },
@@ -83,7 +83,7 @@
         return 200 === this.status;
       },
       noAvailability() {
-        return 400 === this.status;
+        return 404 === this.status;
       }
     }
   }

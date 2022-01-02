@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BookableController;
 use App\Http\Controllers\Api\BookableAvailabilityController;
 use App\Http\Controllers\Api\BookableReviewController;
+use App\Http\Controllers\Api\BookingByReviewController;
+use App\Http\Controllers\Api\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('bookables', BookableController::class)->only('index', 'show');
 Route::get('bookables/{bookable}/availability', BookableAvailabilityController::class);
 Route::get('bookables/{bookable}/reviews', BookableReviewController::class);
+Route::apiResource('reviews', ReviewController::class)->only('show');
+Route::get('/booking-by-review/{reviewKey}', BookingByReviewController::class);
