@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bookable;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Bookable;
 
-class BookableAvailabilityController extends Controller
+class BookablePriceController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -19,12 +20,20 @@ class BookableAvailabilityController extends Controller
         $bookable = Bookable::findOrFail($id);
 
         $data = $request->validate([
-            'from' => 'required|date_format:Y-m-d|after_or_equal:now',
+            'from' => 'required|date_format:Y-m-d',
             'to' => 'required|date_format:Y-m-d|after_or_equal:from'
         ]);
 
-        return $bookable->availableFor($data['from'], $data['to'])
-            ? response()->json([])
-            : response()->json([], 404);
+        $days = (new Carbon($data['from']))->diffInDays(new Carbon($data['to'])) + 1;
+        $price = $days * $bookable->price;
+
+        return response()->json([
+            'data' => [
+                'total' => $price,
+                'breakdown' => [
+                    $bookable->price = $days
+                ]
+            ]
+        ]);
     }
 }
