@@ -3807,7 +3807,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.prev = 10;
                 _context.t0 = _context["catch"](2);
 
-                if (401 === _context.t0.response.status) {
+                if (401 == _context.t0.response.status) {
                   dispatch("logout");
                 }
 

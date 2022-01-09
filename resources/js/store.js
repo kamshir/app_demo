@@ -69,7 +69,7 @@ export default {
           commit("setUser", user);
           commit("setLoggedIn", true);
         } catch (error) {
-          if (401 === error.response.status) {
+          if (401 == error.response.status) {
             dispatch("logout");
           }
         }
