@@ -1,6 +1,7 @@
 <template>
   <div class="w-50 m-auto">
     <div class="card card-body">
+      <h2 class="card-title text-center text-uppercase font-weight-bolder">{{ this.title }}</h2>
       <form>
         <div class="form-group">
           <label for="email">E-mail</label>
@@ -41,7 +42,8 @@ export default {
     return {
       email: null,
       password: null,
-      loading: false
+      loading: false,
+      title: "login"
     };
   },
   methods: {

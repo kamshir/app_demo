@@ -1,6 +1,8 @@
 <template>
   <div class="w-50 m-auto">
     <div class="card card-body">
+      <h2 class="card-title text-center text-uppercase font-weight-bolder">{{ this.title }}</h2>
+
       <form>
 
         <div class="form-group">
@@ -51,7 +53,8 @@ export default {
         password: null,
         password_confirmation: null,
       },
-      loading: false
+      loading: false,
+      title: "register"
     };
   },
   methods: {

@@ -70,7 +70,7 @@
         <div class="d-flex justify-content-between">
           <h6 class="text-uppercase text-secondary font-weight-bolder">Your Cart</h6>
           <h6 class="badge badge-secondary text-uppercase">
-            <span v-if="itemsInBasket">Items {{ itemsInBasket }}</span>
+            <span v-if="itemsInBasket">Items: {{ itemsInBasket }}</span>
             <span v-else>Empty</span>
           </h6>
         </div>
